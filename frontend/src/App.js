@@ -2,6 +2,18 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  /* axios.post('http://0.0.0.0:8000/UsuariosApp/login/', { usuario: "alexis", password: "alexis123" }).then(res => {
+    console.log(res);
+  })
+    .catch(error => {
+      console.log(error)
+    }) */
+  axios.get('http://0.0.0.0:8000/UsuariosApp/get_users/').then(res => {
+    console.log(res);
+  })
+    .catch(error => {
+      console.log(error)
+    })
   return (
     <div className="App">
       <header className="App-header">
@@ -15,7 +27,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Learn Reactsdfsdfsdf
         </a>
       </header>
     </div>

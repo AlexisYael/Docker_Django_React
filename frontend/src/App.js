@@ -4,20 +4,20 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 function App() {
+  if (window.location.origin === "http://172.19.0.5:3000") { //cambia el link dependiendo de la conexion de docker
+    console.log(window.location.origin)
+    axios.defaults.baseURL = "http://0.0.0.0:8000";
+  } else {
+    console.log(window.location.origin)
+    axios.defaults.baseURL = window.location.origin;
+  }
   const [user, setUser] = useState("No hay inicio");
-  //axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
-  axios.post('http://0.0.0.0:8000/UsuariosApp/login/',{ usuario: "alexis", password: "alexis123" }).then(res => {
+  axios.post('/UsuariosApp/login/', { usuario: "alexis", password: "alexis123" }).then(res => {
     setUser(res.data.mensaje.text)
   })
     .catch(error => {
       console.log(error);
     })
-  /*  axios.get('http://0.0.0.0:8000/UsuariosApp/get_users/').then(res => {
-     console.log(res);
-   })
-     .catch(error => {
-       console.log(error)
-     }) */
   return (
     <div className="App">
       <header className="App-header">

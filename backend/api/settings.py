@@ -129,6 +129,8 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 ALLOWED_HOSTS = ['*']
 
+CORS_ALLOWED_HOSTS = ['*']
+
 CORS_ALLOW_HEADERS = [
     'accept',
     'accept-encoding',

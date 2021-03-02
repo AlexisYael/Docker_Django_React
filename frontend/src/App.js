@@ -4,11 +4,9 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 function App() {
-  if (window.location.origin === "http://172.19.0.5:3000") { //cambia el link dependiendo de la conexion de docker
-    console.log(window.location.origin)
+  if (window.location.origin === "http://localhost:3000") {
     axios.defaults.baseURL = "http://0.0.0.0:8000";
   } else {
-    console.log(window.location.origin)
     axios.defaults.baseURL = window.location.origin;
   }
   const [user, setUser] = useState("No hay inicio");

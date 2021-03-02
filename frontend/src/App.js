@@ -1,19 +1,23 @@
 import logo from './logo.svg';
 import './App.css';
+import React, { useState } from 'react';
+import axios from 'axios';
 
 function App() {
-  /* axios.post('http://0.0.0.0:8000/UsuariosApp/login/', { usuario: "alexis", password: "alexis123" }).then(res => {
-    console.log(res);
+  const [user, setUser] = useState("No hay inicio");
+  //axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+  axios.post('http://0.0.0.0:8000/UsuariosApp/login/',{ usuario: "alexis", password: "alexis123" }).then(res => {
+    setUser(res.data.mensaje.text)
   })
     .catch(error => {
-      console.log(error)
-    }) */
-  axios.get('http://0.0.0.0:8000/UsuariosApp/get_users/').then(res => {
-    console.log(res);
-  })
-    .catch(error => {
-      console.log(error)
+      console.log(error);
     })
+  /*  axios.get('http://0.0.0.0:8000/UsuariosApp/get_users/').then(res => {
+     console.log(res);
+   })
+     .catch(error => {
+       console.log(error)
+     }) */
   return (
     <div className="App">
       <header className="App-header">
@@ -27,7 +31,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn Reactsdfsdfsdf
+          {user}
         </a>
       </header>
     </div>

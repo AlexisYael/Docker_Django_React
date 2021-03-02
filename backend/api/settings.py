@@ -25,8 +25,6 @@ SECRET_KEY = '2q2!nm%(ar2$$10oa9s7$+@lb^*nb=&g(65i1#tohv(-rs#tf('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
@@ -129,9 +127,7 @@ STATIC_URL = '/static/'
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-CSRF_COOKIE_SECURE=False
-
-CORS_ALLOWED_ORIGINS = ["*"]
+ALLOWED_HOSTS = ['*']
 
 CORS_ALLOW_HEADERS = [
     'accept',
@@ -149,10 +145,6 @@ CORS_ALLOW_HEADERS = [
 CORS_ALLOW_METHODS = [
     'DELETE',
     'GET',
-    'OPTIONS',
-    'PATCH',
     'POST',
     'PUT',
 ]
-
-CSRF_TRUSTED_ORIGINS = ["*"]

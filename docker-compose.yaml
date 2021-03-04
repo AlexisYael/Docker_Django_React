@@ -10,7 +10,7 @@ services:
        MYSQL_PASSWORD: 'password'
        MYSQL_ROOT_PASSWORD: 'password123'
     ports:
-      - "3306:3306"
+      - "3302:3306"
     networks:
       - db-net
 

@@ -25,8 +25,7 @@ def login(request):
         user = auth.authenticate(username=request.data['usuario'],password=request.data['password'])
         if user is not None:
             auth.login(request,user)
-            return Response(data={'mensaje':{'text':'El inicio de sesion a sido exitoso','title':'Inicio de Sesion'}},status=status.HTTP_202_ACCEPTED,
-            headers={'Access-Control-Allow-Origin':'*'})
+            return Response(data={'mensaje':{'text':'El inicio de sesion a sido exitoso','title':'Inicio de Sesion'}},status=status.HTTP_202_ACCEPTED)
         else:
             return Response(data={'mensaje':{'text':'El usuario o la contraseña son incorrectos, favor de verificar','title':'Error en inicio de sesion'}},status=status.HTTP_400_BAD_REQUEST)
     else:

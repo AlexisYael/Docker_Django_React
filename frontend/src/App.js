@@ -4,8 +4,9 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 function App() {
-  if (window.location.origin === "http://localhost:3000") {
-    axios.defaults.baseURL = "http://0.0.0.0:8000";
+  console.log(window.location.origin);
+  if (window.location.origin === "http://localhost") {
+    axios.defaults.baseURL = "http://127.0.0.1:8000";
   } else {
     axios.defaults.baseURL = window.location.origin;
   }

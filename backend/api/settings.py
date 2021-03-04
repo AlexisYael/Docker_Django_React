@@ -127,9 +127,7 @@ STATIC_URL = '/static/'
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-ALLOWED_HOSTS = ['*']
-
-CORS_ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['0.0.0.0']
 
 CORS_ALLOW_HEADERS = [
     'accept',

@@ -1,0 +1,60 @@
+version: "3.9"
+
+services:
+    db:
+        restart: always
+        image: mysql:8.0
+        command: --default-authentication-plugin=mysql_native_password
+        environment:
+           MYSQL_DATABASE: 'django'
+           MYSQL_USER: 'djangouser'
+           MYSQL_PASSWORD: 'password'
+           MYSQL_ROOT_PASSWORD: 'password123'
+        ports:
+          - "3302:3306"
+        networks:
+          - db-net
+
+    nginx: 
+        restart: unless-stopped
+        container_name: front
+        volumes:
+            - ./docker/nginx/deployment:/etc/nginx/conf.d
+            - ./docker/nginx/certbot/conf:/etc/letsencrypt
+            - ./docker/nginx/certbot/www:/var/www/certbot
+        build:
+            context: .
+            dockerfile: ./docker/nginx/Dockerfile
+        ports:
+            - 80:80
+            - 443:443
+        depends_on: 
+            - backend
+        networks:
+            - db-net
+    
+    certbot:
+        image: certbot/certbot
+        restart: unless-stopped
+        volumes:
+            - ./docker/nginx/certbot/conf:/etc/letsencrypt
+            - ./docker/nginx/certbot/www:/var/www/certbot
+        entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"       
+    
+    backend:
+        restart: unless-stopped
+        container_name: back
+        build:
+            context: .
+            dockerfile: ./docker/backend/Dockerfile
+        entrypoint: /app/docker/backend/wsgi-entrypoint.sh
+        expose:
+            - 8000 
+        depends_on:
+            - db
+        networks:
+            - db-net       
+
+networks:
+    db-net:
+        driver: bridge
